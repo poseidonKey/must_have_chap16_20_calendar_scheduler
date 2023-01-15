@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
 import '../const/colors.dart';
+import 'package:flutter/material.dart';
 
 class ScheduleCard extends StatelessWidget {
   final int startTime;
   final int endTime;
   final String content;
 
-  const ScheduleCard(
-      {super.key,
-      required this.startTime,
-      required this.endTime,
-      required this.content});
+  const ScheduleCard({
+    required this.startTime,
+    required this.endTime,
+    required this.content,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

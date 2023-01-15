@@ -5,19 +5,24 @@ import '../const/colors.dart';
 class MainCalendar extends StatelessWidget {
   final OnDaySelected onDaySelected; // ➊ 날짜 선택 시 실행할 함수
   final DateTime selectedDate; // ➋ 선택된 날짜
-  const MainCalendar(
-      {super.key, required this.onDaySelected, required this.selectedDate});
+
+  const MainCalendar({
+    super.key,
+    required this.onDaySelected,
+    required this.selectedDate,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      locale: "ko_kr",
+      locale: 'ko_kr',
       onDaySelected: onDaySelected,
-      firstDay: DateTime(1800, 1, 1), // ➊ 첫째 날
-      selectedDayPredicate: (date) =>
+      // ➌ 날짜 선택 시 실행할 함수
+      selectedDayPredicate: (date) => // ➍ 선택된 날짜를 구분할 로직
           date.year == selectedDate.year &&
           date.month == selectedDate.month &&
           date.day == selectedDate.day,
+      firstDay: DateTime(1800, 1, 1), // ➊ 첫째 날
       lastDay: DateTime(3000, 1, 1), // ➋ 마지막 날
       focusedDay: DateTime.now(),
       headerStyle: const HeaderStyle(
@@ -65,7 +70,7 @@ class MainCalendar extends StatelessWidget {
           fontWeight: FontWeight.w600,
           color: PRIMARY_COLOR,
         ),
-      ),
+      ), // ➌ 화면에 보여지는 날
     );
   }
 }
