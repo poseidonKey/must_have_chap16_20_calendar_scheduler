@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:must_have_chap16_20_calendar_scheduler/model/schedule_model.dart';
+import 'package:must_have_chap16_20_calendar_scheduler/provider/schedule_provider.dart';
 import '../component/custom_text_field.dart';
 import '../const/colors.dart';
 import 'package:drift/drift.dart' hide Column;
 import 'package:get_it/get_it.dart';
 import '../database/drift_database.dart';
+import 'package:provider/provider.dart';
 
 class ScheduleBottomSheet extends StatefulWidget {
   final DateTime selectedDate;
@@ -109,16 +112,14 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
     if (formKey.currentState!.validate()) {
       // ➊ 폼 검증하기
       formKey.currentState!.save(); // ➋ 폼 저장하기
-
-      await GetIt.I<LocalDatabase>().createSchedule(
-        // ➊ 일정 생성하기
-        SchedulesCompanion(
-          startTime: Value(startTime!),
-          endTime: Value(endTime!),
-          content: Value(content!),
-          date: Value(widget.selectedDate),
-        ),
-      );
+      context.read<ScheduleProvider>().createSchedule(
+            schedule: ScheduleModel(
+                id: "new_model",
+                content: content!,
+                date: widget.selectedDate,
+                startTime: startTime!,
+                endTime: endTime!),
+          );
 
       Navigator.of(context).pop();
     }
