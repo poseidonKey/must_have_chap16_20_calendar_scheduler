@@ -5,8 +5,9 @@ import '../const/colors.dart';
 class MainCalendar extends StatelessWidget {
   final OnDaySelected onDaySelected; // ➊ 날짜 선택 시 실행할 함수
   final DateTime selectedDate; // ➋ 선택된 날짜
+  DateTime focusedDay = DateTime.now();
 
-  const MainCalendar({
+  MainCalendar({
     super.key,
     required this.onDaySelected,
     required this.selectedDate,
@@ -17,6 +18,7 @@ class MainCalendar extends StatelessWidget {
     return TableCalendar(
       locale: 'ko_kr',
       onDaySelected: onDaySelected,
+
       // ➌ 날짜 선택 시 실행할 함수
       selectedDayPredicate: (date) => // ➍ 선택된 날짜를 구분할 로직
           date.year == selectedDate.year &&
@@ -24,7 +26,7 @@ class MainCalendar extends StatelessWidget {
           date.day == selectedDate.day,
       firstDay: DateTime(1800, 1, 1), // ➊ 첫째 날
       lastDay: DateTime(3000, 1, 1), // ➋ 마지막 날
-      focusedDay: DateTime.now(),
+      focusedDay: focusedDay,
       headerStyle: const HeaderStyle(
         // ➊ 달력 최상단 스타일
         titleCentered: true, // 제목 중앙에 위치하기
@@ -37,6 +39,9 @@ class MainCalendar extends StatelessWidget {
       ),
       calendarStyle: CalendarStyle(
         isTodayHighlighted: false,
+        // 현재 월에 없는 이전, 다음 달 날짜를 선택할 때 애니메이션 오류 발생
+        // 되는 현상을 제거하기 위해 아래 내용 추가
+        outsideDecoration: const BoxDecoration(shape: BoxShape.rectangle),
         defaultDecoration: BoxDecoration(
           // ➋ 기본 날짜 스타일
           borderRadius: BorderRadius.circular(6.0),

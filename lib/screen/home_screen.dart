@@ -5,8 +5,6 @@ import '../component/schedule_card.dart';
 import '../component/today_banner.dart';
 import '../component/schedule_bottom_sheet.dart';
 import '../const/colors.dart';
-import 'package:get_it/get_it.dart';
-import '../database/drift_database.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {

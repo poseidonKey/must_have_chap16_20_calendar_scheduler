@@ -61,12 +61,11 @@ class _Time extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(
+    TextStyle textStyle = const TextStyle(
       fontWeight: FontWeight.w600,
       color: PRIMARY_COLOR,
       fontSize: 16.0,
     );
-
     return Column(
       // ➌ 시간을 위에서 아래로 배치
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,9 +3,6 @@ import 'package:must_have_chap16_20_calendar_scheduler/model/schedule_model.dart
 import 'package:must_have_chap16_20_calendar_scheduler/provider/schedule_provider.dart';
 import '../component/custom_text_field.dart';
 import '../const/colors.dart';
-import 'package:drift/drift.dart' hide Column;
-import 'package:get_it/get_it.dart';
-import '../database/drift_database.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleBottomSheet extends StatefulWidget {
@@ -88,6 +85,10 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                     validator: contentValidator,
                   ),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
+                _ColorPicker(),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -152,4 +153,28 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
 
     return null;
   } // 내용값 검증
+}
+
+class _ColorPicker extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List<Color> colors = [
+      const Color(0xffff0000),
+      const Color(0xff00ff00),
+      const Color(0xff0000ff),
+    ];
+    return Wrap(
+      spacing: 8,
+      runSpacing: 10,
+      children: colors
+          .map(
+            (e) => Container(
+              decoration: BoxDecoration(shape: BoxShape.circle, color: e),
+              width: 32,
+              height: 32,
+            ),
+          )
+          .toList(),
+    );
+  }
 }
